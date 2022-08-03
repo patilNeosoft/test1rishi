@@ -1,2 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿
+
+using task_2.Repository;
+
+display obj2 = new display();
+obj2.productdetail();
