@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "List", "List\List.csproj", "{F7E40B6E-1EF5-449E-8F70-7A8D35960A40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "List", "List\List.csproj", "{F7E40B6E-1EF5-449E-8F70-7A8D35960A40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InheritanceExe", "InheritanceExe\InheritanceExe.csproj", "{6C58733E-7E27-444E-ABF7-7B6A6E4C840F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InheritanceExe", "InheritanceExe\InheritanceExe.csproj", "{6C58733E-7E27-444E-ABF7-7B6A6E4C840F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "polymorphismExe", "polymorphismExe\polymorphismExe.csproj", "{5DCD8CE7-9FFD-4D74-85B7-B9FE3E7EA5FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "polymorphismExe", "polymorphismExe\polymorphismExe.csproj", "{5DCD8CE7-9FFD-4D74-85B7-B9FE3E7EA5FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegularExe", "RegularExe\RegularExe.csproj", "{362C076B-E6C4-43C4-9042-55C0AA00ACAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegularExe", "RegularExe\RegularExe.csproj", "{362C076B-E6C4-43C4-9042-55C0AA00ACAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validate", "Validate\Validate.csproj", "{D78DD5FB-29FB-47E3-A27D-B4D854E4A4B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validate", "Validate\Validate.csproj", "{D78DD5FB-29FB-47E3-A27D-B4D854E4A4B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "enumerationExe", "enumerationExe\enumerationExe.csproj", "{1955BE87-9BD8-4537-B076-4EC87F3BC076}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{D78DD5FB-29FB-47E3-A27D-B4D854E4A4B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D78DD5FB-29FB-47E3-A27D-B4D854E4A4B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D78DD5FB-29FB-47E3-A27D-B4D854E4A4B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1955BE87-9BD8-4537-B076-4EC87F3BC076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1955BE87-9BD8-4537-B076-4EC87F3BC076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1955BE87-9BD8-4537-B076-4EC87F3BC076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1955BE87-9BD8-4537-B076-4EC87F3BC076}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
