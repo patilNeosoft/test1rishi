@@ -1,5 +1,4 @@
-﻿
-using day3.Repository;
+﻿using day3.Repository;
 using day3.models;
 //object to access repository
 productRe product = new productRe();
@@ -12,7 +11,7 @@ foreach (Product item in allProducts) {
     Console.WriteLine($"Name:{item.Name}\t category:{item.Category}\t price:{item.Price}\t");
 }
 
-Console.WriteLine("---------");
+Console.WriteLine("-----------------product by category--------------------");
 
 //loop to print product by category
 foreach (Product item in allProducts) {
@@ -26,6 +25,9 @@ foreach (Product item in allProducts) {
     }
 }
 
+
+
+
 //delete product
 
 Console.WriteLine("----------------------delete product--------------------------");
@@ -34,7 +36,7 @@ foreach (Product item in delPro)
 {
     if (item.Category == "Tv")
     {
-        item.Category = null;
+        item.Category= null;
         Console.WriteLine($"Name:{item.Name}\t category:{item.Category}\t price:{item.Price}\t");
     }
     else
@@ -42,6 +44,8 @@ foreach (Product item in delPro)
         Console.WriteLine($"Name:{item.Name}\t category:{item.Category}\t price:{item.Price}\t");
     }
 }
+
+
 
 
 //update
@@ -52,12 +56,16 @@ foreach (Product item in upPro) {
     if (item.Category != "Mobile")
     {
         item.Category = "Mobile";
-       Console.WriteLine($"Name:{item.Name}\t category:{item.Category}\t price:{item.Price}\t");
+       Console.WriteLine($"Name:{item.Name}\tcategory:{item.Category}\tprice:{item.Price}\t");
     }
     else {
-        Console.WriteLine($"Name:{item.Name}\t category:{item.Category}\t price:{item.Price}\t");
+        Console.WriteLine($"Name:{item.Name}\tcategory:{item.Category}\tprice:{item.Price}\t");
    }
 }
+
+
+
+
 
 
 //update
@@ -65,8 +73,6 @@ foreach (Product item in upPro) {
 //{
 //   Console.WriteLine($"Name:{item.Name}\t category:{item.Category}\t price:{item.Price}\t");
 //}
-
-
 
 
 
