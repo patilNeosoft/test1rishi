@@ -1,10 +1,5 @@
-﻿namespace enumerationExe {
-    public enum Days {
-        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
-    }
+﻿using static enumerationExe.enumm;
 
-    public class Program{
-        Days d = 0;
-        
-    }
-}
+Console.WriteLine("enum list is :");
+int c = (int)DayOfWeek.Tuesday;
+Console.WriteLine(c);

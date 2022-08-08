@@ -8,7 +8,18 @@ exceptionExe obj2 = new exceptionExe();
 obj2.CheckT(11);
 
 exceptionExe obj3 = new exceptionExe();
-obj3.MoValidation("+917899669078");
+try
+{
+    Console.WriteLine("enter mobile number");
+    string str = Console.ReadLine(); ;
+    obj3.MoValidation(str);
+    Console.WriteLine("valid mobile number");
+    
+}
+catch(InvalidMo ex) 
+{
+    Console.WriteLine(ex.Message);
+}
 
 
 

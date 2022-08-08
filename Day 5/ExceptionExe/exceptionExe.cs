@@ -47,12 +47,9 @@ namespace ExceptionExe
             }
         }
         public const string pattern = @"^[+]?91[-\s]?[6-9][0-9]{9}$";
-        private string? message;
-
-        
         public void MoValidation(string num) {
             if (!Regex.IsMatch(num, pattern)) {
-                throw new ArithmeticException("please enter valid mobile number");
+                throw new InvalidMo("invalid mobile number.");
             }
         }
     }

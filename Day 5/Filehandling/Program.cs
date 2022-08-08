@@ -1,7 +1,4 @@
-﻿
-using Filehandling.Model;
-
-    FileStream fs = new FileStream("file1.txt", FileMode.Open, FileAccess.ReadWrite);
+﻿    FileStream fs = new FileStream("file1.txt", FileMode.Open, FileAccess.ReadWrite);
     StreamReader sr = new StreamReader(fs);
     StreamWriter sw = new StreamWriter(fs);
     string str = "ok";
