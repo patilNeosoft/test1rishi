@@ -18,6 +18,8 @@ namespace collections_list_.Repository
                 new Product(){Id=2,Name="mobile",Price=20000 },
 
             };
+            
+
         }
             //getall products
             public List<Product> GetProducts() { 
@@ -56,6 +58,7 @@ namespace collections_list_.Repository
             return true;
         }
 
+        //filter method
         private Product GetProductsByName(string name)
         {
             return products.Find(p => p.Name == name);
@@ -68,9 +71,12 @@ namespace collections_list_.Repository
             //get product name in res1
             var product = GetProductsByName(name);
             //if name is present then remove product
-            return product != null ? products.Remove(product) :false;    
+            return product != null ? products.Remove(product) :false;
 
         }
+
+
+       
     }
     
 }
