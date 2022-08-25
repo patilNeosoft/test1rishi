@@ -1,118 +1,167 @@
-﻿using BurgerApp.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
+using System.Data.SqlClient;
 namespace BurgerApp.Repository
 {
     internal class BurgerRepo
     {
-        List<Burger> burgers;
-        List<Burger> cartItems;
-        public BurgerRepo()
+        SqlConnection con = new SqlConnection("Data source = DESKTOP-PQQ575E;Database=BurgerDb ;integrated Security = true");
+        public void DisplayAll()
         {
-            burgers = new List<Burger>() {
-                new Burger(){Id=1,Name="Turkey Burgers",Location="Mumbai",Price=120,Quantity=5 },
-                new Burger(){Id=2,Name="Veggie Burgers",Location="Panvel",Price=150,Quantity=15 },
-                new Burger(){Id=3,Name="Beef Burgers",Location="Vashi",Price=70,Quantity=6 },
-                new Burger(){Id=4,Name="Turkey Burgers",Location="Panvel",Price=90,Quantity=23 }
+            con.Open();
 
-            };
-            cartItems = new List<Burger>() { };
-        }
-        
-        int total;
-        internal void CalculateBill()
-        {
-            Console.WriteLine("enter quantity");
-            int quantity = int.Parse(Console.ReadLine());
-            foreach (Burger a in cartItems)
+            SqlCommand cmd = new SqlCommand("select *from Burgers", con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                int Price = a.Price * quantity;
-                total += a.Price;
-                a.Quantity -= quantity;
-                Console.WriteLine($"Id : {a.Id},Name : {a.Name},Location : {a.Location},Price : {Price},Quantity : {quantity}");
-                Console.WriteLine($"Total Price :{total}");
-                
-
+                Console.WriteLine($"Id :{reader["BId"]}\tName :{reader["BName"]}\tBurger avail location :{reader["BLocation"]}\t ");
             }
 
 
+            con.Close();
         }
 
-        private Burger GetBurgerById(int id)
+        //insert into table
+        public void InsertIntoTable()
         {
-            return burgers.Find(p => p.Id == id);
+            con.Open();
+            Console.WriteLine("enter User Id");
+            string UserId = Console.ReadLine();
+            Console.WriteLine("enter Id of burger ");
+            string BId = Console.ReadLine();
 
+            Console.WriteLine("enter Burger Quantity");
+            string BQuantity = Console.ReadLine();
+
+            string query = "INSERT INTO Cart (UserId,BId,BName,BLocation,BPrice,BQuantity,Total_Price) SELECT @UserId,BId,BName,BLocation,BPrice,@BQuantity,@BQuantity*BPrice FROM Burgers where BId = @BId ";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //cmd.Parameters.AddWithValue("@UserId", UserId);
+            cmd.Parameters.AddWithValue("@BId", BId);
+            cmd.Parameters.AddWithValue("@UserId", BId);
+            cmd.Parameters.AddWithValue("@BQuantity", BQuantity);
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
-        public void Addproduct()
+
+        //view cart
+        public void ViewCart()
         {
-            Burger Cart1 = new Burger() { };
-            Console.WriteLine("Enter id of burger to add to cart ");
-            int id = int.Parse(Console.ReadLine());
-            Cart1 = GetBurgerById(id);
-            if (Cart1 == null)
+            con.Open();
+            Console.WriteLine("enter User Id");
+            string UserId = Console.ReadLine();
+            SqlCommand cmd = new SqlCommand("select *from Cart where UserId=@UserId", con);
+            cmd.Parameters.AddWithValue("@UserId", UserId);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
             {
-                Console.WriteLine("Burger does not exist in menu.Try again");
+                Console.WriteLine($"Cart Id : {reader["CID"]}\t Burger Id :{reader["BId"]}\tBurger Name :{reader["BName"]}\t Burger available location :{reader["BLocation"]}\t Burger Price :{reader["BPrice"]}\t Burger Quantity :{reader["BQuantity"]}\t Burger Total Price :{reader["Total_Price"]} ");
+            }
+
+            con.Close();
+        }
+
+        //delete record
+        public void DeleteFromCart()
+        {
+
+
+            con.Open();
+            Console.WriteLine("enter Id of Burger to Remove");
+            string DelId = Console.ReadLine();
+
+            string query = "delete from Cart where BId = @id";
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            cmd.Parameters.AddWithValue("@id", DelId);
+
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        //update cart
+        public void UpdateCart()
+        {
+            con.Open();
+            Console.WriteLine("enter Id of Cart Item to update");
+            string UpdateId = Console.ReadLine();
+            Console.WriteLine("Enter Quantity of product to change :");
+            string UpQuantity = Console.ReadLine();
+            string query1 = "update Cart set BQuantity = @UpQuantity where CId = @UpdateId    update Cart set Total_Price = BQuantity * BPrice where CId = @UpdateId";
+            SqlCommand cmd = new SqlCommand(query1, con);
+            cmd.Parameters.AddWithValue("@UpdateId", UpdateId);
+            cmd.Parameters.AddWithValue("UpQuantity", UpQuantity);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        public void ViewBill()
+        {
+            con.Open();
+            Console.WriteLine("enter UserId");
+            string UserId = Console.ReadLine();
+            SqlCommand cmd = new SqlCommand("select *from Bill where UserId=@UserId", con);
+            
+            cmd.Parameters.AddWithValue("@UserId", UserId);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine($"UserId:{reader["UserId"]}\tBillId:{reader["BillId"]}\tCart Id:{reader["CID"]}\tBurger Id:{reader["BId"]}\tBurger Name:{reader["BName"]}\tBurger available location:{reader["BLocation"]}\tBurger Price:{reader["BPrice"]}\tBurger Quantity:{reader["BQuantity"]}\tBurger Total Price:{reader["Total_Price"]}");
+            }
+
+            con.Close();
+        }
+
+        //insert to bill table
+        public void InsertToBillTable()
+        {
+            con.Open();
+
+            
+            Console.WriteLine("enter UserId");
+            string UserId = Console.ReadLine();
+            string query = "INSERT INTO Bill (UserId,CId,BId,BName,BLocation,BPrice,BQuantity,Total_Price) SELECT UserId,CId,BId,BName,BLocation,BPrice,BQuantity,Total_Price FROM Cart where UserId=@UserId";
+            SqlCommand cmd = new SqlCommand(query, con);
+            string query1 = "DELETE FROM Cart WHERE UserId=@UserId;";
+            SqlCommand cmd1 = new SqlCommand(query1, con);
+            cmd.Parameters.AddWithValue("@UserId", UserId);
+            
+            cmd1.Parameters.AddWithValue("@UserId", UserId);
+            cmd.ExecuteNonQuery();
+            cmd1.ExecuteNonQuery();
+            Console.WriteLine("Your bill has been generated !");
+            Console.WriteLine("Proceed to view bill.........");
+            con.Close();
+        }
+
+        //by all from cart
+        public bool ByAll()
+        {
+            Console.WriteLine("Proceed to by all items from cart");
+            Console.WriteLine("Enter 1 to proceed");
+            int val = int.Parse(Console.ReadLine());
+            if (val == 1)
+            {
+                return true;
             }
             else
             {
-                cartItems.Add(Cart1);
-                Console.WriteLine("Burger added to cart successfully !");
+                return false;
             }
-         }
-        internal void ViewCart()
+        }
+
+        //generate bill
+        public void GenBill()
         {
-            if (cartItems.Count == 0)
+            bool Result = ByAll();
+            if (Result)
             {
-                Console.WriteLine("cart is empty !");
-            }
-            else
-            {
-                foreach (Burger a in cartItems)
-                {
-                    Console.WriteLine($"Id : {a.Id},Name : {a.Name},Location : {a.Location},Price : {a.Price}");
-                }
+                InsertToBillTable();
+
             }
         }
 
-        
-        public bool DeleteItem() {
-            Console.WriteLine("enter Id of product");
-            int deleteId = int.Parse(Console.ReadLine());
-            var burger = GetBurgerById(deleteId);
-            //if name is present then remove product
-            return burger != null ? cartItems.Remove(burger) : false;
+        //view 
+    }
 
-        }
-
-
-        //get burgers by location
-        internal void GetBurgersByLoaction()
-        {
-            Console.WriteLine("enter location");
-            string location = Console.ReadLine();
-            var AvailableBurgers = burgers.Where(p => p.Location == location).ToList();
-            if (AvailableBurgers.Count == 0) {
-                Console.WriteLine("not available");
-            }
-            else
-            Console.WriteLine(" available burgers are :");
-            foreach (Burger a in AvailableBurgers)
-            {
-                Console.WriteLine($"Id : {a.Id},Name : {a.Name},Location : {a.Location},Price : {a.Price},Quantity : {a.Quantity}");
-            }
-        }
-
-        //get all burgers
-        public void GetBurgers()
-        {
-            foreach (Burger a in burgers)
-            {
-                Console.WriteLine($"Id : {a.Id},Name : {a.Name},Location : {a.Location},Price : {a.Price},Quantity : {a.Quantity}");
-            }
-        }
-        }
 }

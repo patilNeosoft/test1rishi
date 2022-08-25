@@ -3,48 +3,50 @@ using BurgerApp.Repository;
 
 BurgerRepo obj1 = new BurgerRepo();
 START:
-Console.WriteLine("1.View all menues");
-Console.WriteLine("2.Get burgers by location");
-Console.WriteLine("3.Add to cart");
-Console.WriteLine("4.View cart");
-Console.WriteLine("5.Delete item");
-Console.WriteLine("6.Calculate bill ");
+Console.WriteLine("1.View All Burgers");
+Console.WriteLine("2.Add to cart");
+Console.WriteLine("3.View cart");
+Console.WriteLine("4.Delete item from cart");
+Console.WriteLine("5.update cart");
+Console.WriteLine("6.Generate bill");
 Console.WriteLine("--------------select choice-----------");
 int option = int.Parse(Console.ReadLine());
 switch (option)
 {
     case 1:
         Console.WriteLine("all menu list is :");
-        obj1.GetBurgers();
-        
+        obj1.DisplayAll();
         goto START;
     case 2:
-        obj1.GetBurgersByLoaction();
-      
+        Console.WriteLine("Add to cart");
+        obj1.InsertIntoTable();
         goto START;
     case 3:
-        obj1.Addproduct();
-        Console.WriteLine("done");
+        Console.WriteLine("View cart");
+        obj1.ViewCart();
         goto START;
     case 4:
-        obj1.ViewCart();
-        
+        Console.WriteLine("Delete from cart");
+        obj1.DeleteFromCart();
         goto START;
-    case 5: 
-       bool a = obj1.DeleteItem();
-        if (a) {
-            Console.WriteLine("Burger from cart removed successfully !");
-                }
-        else {
-            Console.WriteLine("Burger does not exist in cart !");
-        }
+    case 5:
+        Console.WriteLine("Update cart");
+        obj1.UpdateCart();
         goto START;
     case 6:
-        obj1.CalculateBill();
-        
+        Console.WriteLine("Generate bill");
+        obj1.GenBill();
+        obj1.ViewBill();
         goto START;
     default:
         Console.WriteLine("close");
         break;
-
 }
+
+        //obj1.DisplayAll();
+        //obj1.InsertIntoTable();
+        //obj1.ViewCart();
+        //obj1.DeleteFromCart();
+        //obj1.DisplayAll();
+        //obj1.UpdateCart();
+//obj1.ViewCart();

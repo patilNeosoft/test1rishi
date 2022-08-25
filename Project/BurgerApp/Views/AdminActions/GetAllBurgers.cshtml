@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BurgerApp.Models.Burger>
+
+@{
+    ViewData["Title"] = "GetAllBurgers";
+}
+
+<h1>Burgers List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Burger_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Burger_Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Burger_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Burger_Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="DeleteBurger" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+
+<div>
+   
+</div>
+    </tbody>
+</table>

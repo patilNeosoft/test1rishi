@@ -1,0 +1,47 @@
+﻿@model Burger_With_Database_MVC.Models.Admin
+
+
+<h1>Register</h1>
+
+<h4>Admin</h4>
+<h6>Fields mark with * are compulsory</h6>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RegisterAdmins">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name *</label>
+                <input asp-for="Name" class="form-control" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label">User Name *</label>
+                <input asp-for="UserName" class="form-control" required />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label">Phone *</label>
+                <input asp-for="Phone" class="form-control" required />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Password *</label>
+                <input asp-for="Password" class="form-control" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+               <br />
+               Already Registered ? <a asp-action="Login">Login</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

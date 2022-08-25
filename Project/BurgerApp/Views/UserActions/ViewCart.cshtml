@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BurgerApp.Models.Cart>
+
+@{
+    ViewData["Title"] = "ViewCart";
+}
+
+<h1>ViewCart</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Burger_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Burger_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Burger_Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Burger_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Burger_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Burger_Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                
+                <a asp-action="RemoveCartItem" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
