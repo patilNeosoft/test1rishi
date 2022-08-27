@@ -36,11 +36,12 @@ namespace BurgerApp.Controllers
             try
             {
                 _registerS.AddBurger(burger);
+                TempData["AddBurger_Alert"] = "Burger added successfully !!";
                 return RedirectToAction("GetAllBurgers");
             }
             catch (UserExistsException e)
             {
-                return StatusCode(500, e.Message);
+                return View(e.Message);
 
             }
         }
@@ -49,12 +50,14 @@ namespace BurgerApp.Controllers
         public ActionResult DeleteBurger(int id)
         {
             Burger burger = _registerS.FindRecordById(id);
+
             return View(burger);
         }
         [HttpPost]
         public ActionResult DeleteBurger(Burger burger)
         {
             _registerS.DeleteBurger(burger.Id);
+            TempData["DeleteBurger_Alert"] = "Burger Deleted successfully !!";
 
             return RedirectToAction("GetAllBurgers");
         }
@@ -72,6 +75,8 @@ namespace BurgerApp.Controllers
         public ActionResult Edit(Burger burger)
         {
             _registerS.Edit(burger);
+            TempData["EditBurger_Alert"] = "Burger updated successfully !!";
+
             return RedirectToAction("GetAllBurgers");
 
         }

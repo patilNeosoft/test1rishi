@@ -109,6 +109,7 @@ namespace BurgerApp.Services
                 cart.Burger_Location = burger.Burger_Location;
                 cart.Quantity = burger.Quantity;
                 cart.Price = burger.Price;
+                cart.Img = burger.Img;
                 //cart.Burger_Id = burger.Id;
            
                 _dbR.Cart.Add(cart);
@@ -129,7 +130,14 @@ namespace BurgerApp.Services
             _dbR.Cart.Remove(cart);
             _dbR.SaveChanges();
         }
-        
+        public void RemoveFromBill(int id, string User_Name)
+        {
+
+            Buy buy =_dbR.Buy.Where(u => u.Id == id && u.User_Name == User_Name).FirstOrDefault();
+            _dbR.Buy.Remove(buy);
+            _dbR.SaveChanges();
+        }
+
         public Cart FindRecordByIdAndNameCart(int id,string User_Name)
         {
             return _dbR.Cart.Where(u => u.Id == id && u.User_Name == User_Name).FirstOrDefault();
@@ -192,6 +200,7 @@ namespace BurgerApp.Services
                 buy.Quantity = Quantity;
                 buy.Price = cart.Price;
                 buy.DateTime = DateTime.Now;
+                buy.Img = cart.Img;
                 Burger burger = FindRecordById(cart.Burger_Id);
                 if (burger.Quantity >= Quantity) { 
                 burger.Quantity = burger.Quantity - Quantity;
@@ -215,7 +224,30 @@ namespace BurgerApp.Services
             return _dbR.Buy.Where(u => u.User_Name == User_Name).ToList();
         }
 
-       
+        //history table
+        public void History(int id, string User_Name)
+        {
+            List<Buy> buy = _dbR.Buy.Where(u => u.User_Name.Contains(User_Name)).ToList();
+            
+            
+            int count = _dbR.Buy.Count();
+            foreach (Buy item in buy)
+            {
+                History history = new History();
+                history.User_Name = User_Name;
+                history.Burger_Id = item.Burger_Id;
+                history.Burger_Name = item.Burger_Name;
+                history.Burger_Location = item.Burger_Location;
+                history.Quantity = item.Quantity;
+                history.Price = item.Price;
+                history.DateTime = DateTime.Now;
+                _dbR.History.Add(history);
+                
+                _dbR.Buy.Remove(item);
+                _dbR.SaveChanges();
+            }
+            _dbR.SaveChanges();
 
-    }
+        }
+     }
 }

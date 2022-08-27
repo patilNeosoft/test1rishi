@@ -24,9 +24,10 @@ namespace BurgerApp.Services
         List<Buy> ViewBill(string name);
         void RemoveCartItem(int id, string User_Name);
         List<Cart> ViewCart( string name);
-        
+        public void History(int id, string User_Name);
 
         //public void EditCart(Cart cart);
+        public void RemoveFromBill(int id, string name);
 
 
     }

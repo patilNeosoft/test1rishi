@@ -96,6 +96,20 @@ namespace BurgerApp.Controllers
             }
         }
 
+        public ActionResult RemoveFromBill(int id)
+        {
+                var name = HttpContext.Session.GetString("User_Name");
+                _registerS.RemoveFromBill(id, name);
+
+                return RedirectToAction("ViewBill");
+
+            
+        }
+
+
+
+
+
         public ActionResult ViewCart()
         {
             
@@ -139,11 +153,12 @@ namespace BurgerApp.Controllers
             return View(buy);
 
         }
-        public ActionResult Confirm()
+        public ActionResult Confirm(int id)
         {
             var User_Name = HttpContext.Session.GetString("User_Name");
-            
+            _registerS.History(id,User_Name);
             return View();
+
         }
     }
 }

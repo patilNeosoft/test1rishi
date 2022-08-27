@@ -48,14 +48,15 @@ namespace BurgerApp.Controllers
         public ActionResult User_Home()
         {
             ViewBag.User_Name = HttpContext.Session.GetString("User_Name");
-            return View();
+            return RedirectToAction("AllBurgers", "UserActions");
+
         }
 
         public ActionResult Admin_Home()
         {
             ViewBag.User_Name = HttpContext.Session.GetString("User_Name");
+            return RedirectToAction("GetAllBurgers", "AdminActions");
 
-            return View();
         }
     
         [HttpPost]
@@ -89,7 +90,7 @@ namespace BurgerApp.Controllers
 
         public ActionResult Logout()
         {
-            return RedirectToAction("Login");
+            return RedirectToAction("Login","Register");
         }
 
 

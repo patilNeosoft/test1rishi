@@ -7,6 +7,8 @@
         public string Burger_Location { get; set; } 
         public int Quantity { get; set; }
         public float Price { get; set; }
+        public string Img { get; set;}
+
         }
     }
 

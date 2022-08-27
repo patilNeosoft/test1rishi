@@ -5,13 +5,22 @@
 }
 <head>
     <style>
-      
+      body{
+          background: -webkit-linear-gradient(360deg,#e9fbcf 10%,#1d7d8e 360%); background: linear-gradient(360deg,#e9fbcf 10%,#1d7d8e 360%); }
+      }
         #required{
         color:red;
         text-align:center;
     }
     .row{
         justify-content:center;
+        background-color:transparent;
+        font-size:20px;
+        
+    }
+    input{
+        height:40px;
+
     }
     #heading{
          text-align:center;
@@ -47,19 +56,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="Mobile_Number" class="control-label"></label>*
-                <input asp-for="Mobile_Number" class="form-control" required />
+                <input asp-for="Mobile_Number" type="number" class="form-control" required />
                 <span asp-validation-for="Mobile_Number" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>*
-                <input asp-for="Password" class="form-control" required />
+                <input asp-for="Password" type="password" class="form-control" required />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
              <br />
             <div class="form-group">
                 <input type="submit" value="Register" class="btn btn-success" />
-               
+                 
+                <br />    
             </div>
+            <br />
+            <a asp-action="Login">Login</a>
         </form>
     </div>
 </div>

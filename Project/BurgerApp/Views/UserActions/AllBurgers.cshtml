@@ -4,7 +4,7 @@
     ViewData["Title"] = "AllBurgers";
 }
 
-<h1>AllBurgers</h1>
+
 @if(@TempData["Buy_Alert"]!= null)
 {
  <div class="alert alert-success" role="alert">
@@ -12,44 +12,55 @@
 </div>   
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Burger_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Burger_Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burger_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burger_Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="AddTocart" asp-route-id="@item.Id">Add to cart</a> 
-          
-          </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <h3 class="navbar-brand"> Welcome @ViewBag.User_name</h3>
+            <div class="container-fluid">
+                
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                   
+                    <ul class="navbar-nav flex-grow-1">
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="UserActions" asp-action="ViewCart" >View Cart</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="UserActions" asp-action="ViewBill">View Bill</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <h1>AllBurgers</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                <a>@Html.DisplayFor(modelItem => item.Burger_Name)</a>
+                            </h5>
+                            <!-- Text -->
+                            <img class="card-img-top" src=@item.Img  alt="Card image cap" height="300px" width="300px">
+                            <p class="card-text">
+                                <h3 hidden>Id : @Html.DisplayFor(modelItem => item.Id)</h3>
+                                <h3>Available at : @Html.DisplayFor(modelItem => item.Burger_Location)</h3>
+                                <h3>Price : @Html.DisplayFor(modelItem => item.Price)</h3>
+                                <h3>Quantity : @Html.DisplayFor(modelItem => item.Quantity)</h3>
+                                <button type="button" class="btn btn-info"><a asp-action="AddToCart" asp-route-id="@item.Id">Add To Cart</a>
+                                </button>
+                                </p>
+                        </div>
+                    </div>
+                </div>
+                }
+         <div>
+    </div>
+        

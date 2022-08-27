@@ -4,13 +4,39 @@
     ViewData["Title"] = "Buy";
 }
 
-<h1>Buy</h1>
+<h1 id="heading">Buy</h1>
 @if(@TempData["Alert"]!= null)
 {
  <div class="alert alert-success" role="alert">
   @TempData["Register_Alert"]
 </div>   
 }
+<head>
+<style>
+body{
+           
+            background: -webkit-linear-gradient(360deg,#e9fbcf 10%,#1d7d8e 360%); background: linear-gradient(360deg,#e9fbcf 10%,#1d7d8e 360%);
+        }
+          .row{
+            justify-content:center;
+            background-color:transparent;
+            font-size:20px;
+
+
+        }
+        input{
+            height:40px;
+
+        }
+        #heading{
+             text-align:center;
+        }
+        #btn1,#btn2{
+            margin-left :70px;
+        }
+
+</style>
+</head>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,20 +44,22 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
+                <input asp-for="Quantity" class="form-control" min="1" required />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary" />
+            <br />
+            <div class="form-group" >
+
+                <input type="submit" value="Submit" class="btn btn-info" id="btn1"/>
+            <a  id="btn2" class="btn btn-info"  asp-action="ViewCart">Back</a>
             </div>
+            <br />
+            
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="ViewBurgers">Back</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

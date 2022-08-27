@@ -18,7 +18,8 @@ namespace BurgerApp.Context
         public DbSet<Burger> Burgers { get; set; }
         public DbSet<Cart> Cart { get; set; }
         public DbSet<Buy> Buy { get; set; }
+        public DbSet<History> History { get; set; }
 
-       
+
     }
 }

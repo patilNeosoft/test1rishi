@@ -3,17 +3,70 @@
 @{
     ViewData["Title"] = "ViewBill";
 }
+<head>
+    <style>
+        body{
 
-<h1>ViewBill</h1>
+            background: -webkit-linear-gradient(360deg,#e9fbcf 10%,#1d7d8e 360%); background: linear-gradient(360deg,#e9fbcf 10%,#1d7d8e 360%);
+        }
+          .row{
+            justify-content:center;
+            background-color:transparent;
+            font-size:20px;
+
+
+        }
+        #btn{
+          margin-left:530px;
+        }
+        input{
+            height:40px;
+
+        }
+        #heading{
+             text-align:center;
+        }
+        .center {
+  position: relative;
+  padding: 50px 50px;
+  background: #fff;
+  border-radius: 10px;
+}
+.center h1 {
+  font-size: 2em;
+  border-left: 5px solid dodgerblue;
+  padding: 10px;
+  color: #000;
+  letter-spacing: 5px;
+  margin-bottom: 60px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+
+.center .inputbox [type="button"] {
+  width: 50%;
+  background: dodgerblue;
+  color: #fff;
+  border: #fff;
+}
+
+
+    </style>
+</head>
+
+
+
+
+<div class="center">
+    <h2 id="heading">Bill</h2>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Burger_Id)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User_Name)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Burger_Name)
             </th>
@@ -30,38 +83,77 @@
         </tr>
     </thead>
     <tbody>
-@{ float Total =0;}
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burger_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burger_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burger_Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-                    @{
-                       
-                       Total = item.Price + Total ;
-                    }
-            </td>
-           
-        </tr>
-        
-}
-    </tbody>
-</table>
-<h1>Total Price @Total</h1>
-<a asp-action="Confirm">Confirm</a> 
+        @{
+            float Total = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Burger_Id)
+                </td>
 
- 
+                <td>
+                    @Html.DisplayFor(modelItem => item.Burger_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Burger_Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                @{
+                    float price = item.Quantity * item.Price;
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => price)
+                    @{
+
+                        Total = price + Total;
+                    }
+                </td>
+                <td>
+                    <a asp-action="RemoveFromBill" asp-route-id="@item.Id" class="btn btn-info">Remove</a>
+                </td>
+            </tr>
+
+<br />
+        }
+
+    </tbody>
+   
+</table>
+
+  <h1>Checkout Now</h1>
+  <form>
+    <div class="inputbox">
+         <label>Card Number</label><br />
+      <input type="text" required="required">
+     
+    </div>
+    <div class="inputbox">
+        <label>Exp date</label><br />
+      <input type="date" required="required">
+      
+    </div>
+    <div class="inputbox">
+        <label>Cvv Number</label><br />
+      <input type="number" required="required">
+      
+    </div>
+    <div class="inputbox">
+        <label>Address</label><br />
+      <input type="text" required="required">
+      
+    </div><br />
+    <h2 id="heading">Total Price : @Total</h2>
+    <br />
+    <div class="inputbox">
+      <input type="submit" value="Confirm" asp-action="Confirm" asp-controller="UserActions" class="btn btn-success">
+    </div>
+  </form>
+</div>
+
+
+
+

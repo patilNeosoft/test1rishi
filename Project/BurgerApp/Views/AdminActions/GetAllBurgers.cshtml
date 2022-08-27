@@ -3,32 +3,55 @@
         @{
             ViewData["Title"] = "GetAllBurgers";
         }
-
-        <h1>Burgers List</h1>
+@if(TempData["AddBurger_Alert"] != null)
+{
+     <div class="alert alert-success" role="alert">
+        @TempData["AddBurger_Alert"]
+    </div>
+}
+@if(TempData["EditBurger_Alert"] != null)
+{
+     <div class="alert alert-success" role="alert">
+        @TempData["EditBurger_Alert"]
+    </div>
+}
+@if(TempData["DeleteBurger_Alert"] != null)
+{
+     <div class="alert alert-success" role="alert">
+        @TempData["DeleteBurger_Alert"]
+    </div>
+}
+                               
+<button type="button" class="btn btn-info" asp-controller="AdminActions" asp-action="AddBurger"><a asp-controller="AdminActions" asp-action="AddBurger">Add Burgers -></a>
+ </button>
+<h1>Burgers List</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach (var item in Model)
             {
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">
+
+                            <h5 class="card-title">
                                 <a>@Html.DisplayFor(modelItem => item.Burger_Name)</a>
-                            </h4>
+                            </h5>
                             <!-- Text -->
+                            <img class="card-img-top" src=@item.Img  alt="Card image cap" height="300px" width="300px">
                             <p class="card-text">
-                                <h3>Id : @Html.DisplayFor(modelItem => item.Id)</h3>
+                                <h3 hidden>Id : @Html.DisplayFor(modelItem => item.Id)</h3>
                                 <h3>Available at : @Html.DisplayFor(modelItem => item.Burger_Location)</h3>
                                 <h3>Price : @Html.DisplayFor(modelItem => item.Price)</h3>
                                 <h3>Quantity : @Html.DisplayFor(modelItem => item.Quantity)</h3>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                                <a asp-action="DeleteBurger" asp-route-id="@item.Id">Delete</a>
-
+                                <button type="button" class="btn btn-info"><a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                </button>
+                                <button type="button" class="btn btn-info"><a asp-action="DeleteBurger" asp-route-id="@item.Id">Delete</a></button>
                             </p>
                         </div>
                     </div>
                 </div>
                 }
-              <div>
+         <div>
+    </div>
             
 
 
