@@ -39,9 +39,9 @@
                             <img class="card-img-top" src=@item.Img  alt="Card image cap" height="300px" width="300px">
                             <p class="card-text">
                                 <h3 hidden>Id : @Html.DisplayFor(modelItem => item.Id)</h3>
-                                <h3>Available at : @Html.DisplayFor(modelItem => item.Burger_Location)</h3>
-                                <h3>Price : @Html.DisplayFor(modelItem => item.Price)</h3>
-                                <h3>Quantity : @Html.DisplayFor(modelItem => item.Quantity)</h3>
+                                <h5>Available at : @Html.DisplayFor(modelItem => item.Burger_Location)</h5>
+                                <h4>Price : @Html.DisplayFor(modelItem => item.Price)</h4>
+                                <h4>Quantity : @Html.DisplayFor(modelItem => item.Quantity)</h4>
                                 <button type="button" class="btn btn-info"><a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                                 </button>
                                 <button type="button" class="btn btn-info"><a asp-action="DeleteBurger" asp-route-id="@item.Id">Delete</a></button>

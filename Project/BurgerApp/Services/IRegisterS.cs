@@ -29,6 +29,7 @@ namespace BurgerApp.Services
         //public void EditCart(Cart cart);
         public void RemoveFromBill(int id, string name);
 
+        public List<History> OrderHistory(string name);
 
     }
 }

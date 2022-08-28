@@ -11,7 +11,7 @@ namespace BurgerApp.Controllers
         {
             _registerS = registerS;
         }
-        //AddBurger,DeleteBurger,EditBurger,Logout
+       
 
         //view all burgers 
         public IActionResult GetAllBurgers()
@@ -39,9 +39,10 @@ namespace BurgerApp.Controllers
                 TempData["AddBurger_Alert"] = "Burger added successfully !!";
                 return RedirectToAction("GetAllBurgers");
             }
-            catch (UserExistsException e)
+            catch
             {
-                return View(e.Message);
+                return RedirectToAction("AddBurgerEx", "Exceptions");
+
 
             }
         }
@@ -56,10 +57,19 @@ namespace BurgerApp.Controllers
         [HttpPost]
         public ActionResult DeleteBurger(Burger burger)
         {
-            _registerS.DeleteBurger(burger.Id);
-            TempData["DeleteBurger_Alert"] = "Burger Deleted successfully !!";
+            try
+            {
+                _registerS.DeleteBurger(burger.Id);
+                TempData["DeleteBurger_Alert"] = "Burger Deleted successfully !!";
 
-            return RedirectToAction("GetAllBurgers");
+                return RedirectToAction("GetAllBurgers");
+            }
+            catch
+            {
+
+                return RedirectToAction("DeleteBurgerEx", "Exceptions");
+             }
+
         }
 
         //edit burger
@@ -74,10 +84,19 @@ namespace BurgerApp.Controllers
         [HttpPost]
         public ActionResult Edit(Burger burger)
         {
-            _registerS.Edit(burger);
-            TempData["EditBurger_Alert"] = "Burger updated successfully !!";
+            try
+            {
+                _registerS.Edit(burger);
+                TempData["EditBurger_Alert"] = "Burger updated successfully !!";
 
-            return RedirectToAction("GetAllBurgers");
+                return RedirectToAction("GetAllBurgers");
+
+            }
+            catch
+            {
+             return RedirectToAction("EditEx", "Exceptions");
+
+            }
 
         }
 

@@ -1,26 +1,29 @@
-﻿@model IEnumerable<BurgerApp.Models.Cart>
+﻿@model IEnumerable<BurgerApp.Models.History>
 
 @{
-    ViewData["Title"] = "ViewCart";
+    ViewData["Title"] = "OrderHistory";
 }
+
 <head>
-    <style>
-        body{
-           
-            background: -webkit-linear-gradient(360deg,#e9fbcf 10%,#1d7d8e 360%); background: linear-gradient(360deg,#e9fbcf 10%,#1d7d8e 360%);
-        }
-    </style>
-</head>
-<h1>ViewCart</h1>
-<button type="button" class="btn btn-info"><a asp-action="AllBurgers">Home</a></button>
+<style>
+body{
+     background: -webkit-linear-gradient(360deg,#e9fbcf 10%,#1d7d8e 360%); background: linear-gradient(360deg,#e9fbcf 10%,#1d7d8e 360%);
+     }
+ </style>
+ </head>
+        <button type="button" class="btn btn-info"><a asp-action="ViewBill">View Bill</a></button>
+                                
+
+<h1>Order History</h1>
+
 
 <table class="table">
     <thead>
         <tr>
-            <th>Burger Img</th>
             <th>
                 @Html.DisplayNameFor(model => model.Burger_Id)
             </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Burger_Name)
             </th>
@@ -33,15 +36,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                <img src="@item.Img" height="100px" width="100px"/>
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Burger_Id)
             </td>
@@ -59,14 +62,10 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                 <button type="button" class="btn btn-info"><a asp-action="Buy" asp-route-id="@item.Id">Buy Now</a> </button>
-                  <button type="button" class="btn btn-info"><a asp-action="RemoveCartItem" asp-route-id="@item.Id">Delete</a></button>
-                
+                @Html.DisplayFor(modelItem => item.DateTime)
             </td>
+            
         </tr>
 }
     </tbody>
-
-           
 </table>
-

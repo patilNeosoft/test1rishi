@@ -20,9 +20,9 @@ namespace BurgerApp.Services
             {
                 _dbR.RegisterUsers.Add(user);
                 _dbR.SaveChanges();
+               
             }
-
-
+            
         }
         public Register GetUserByName(string name)
         {
@@ -39,6 +39,11 @@ namespace BurgerApp.Services
         public Burger GetBurgerByLocation(string location)
         {
             return _dbR.Burgers.Where(u => u.Burger_Location == location).FirstOrDefault();
+        }
+        //view order history
+        public List<History> OrderHistory(string name)
+        {
+            return _dbR.History.Where(u => u.User_Name == name).ToList();
         }
 
         //login 

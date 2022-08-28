@@ -29,6 +29,13 @@
     </style>
     
 </head>
+@if (@TempData["Register_Alert"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Register_Alert"]
+    </div>
+}
+
 
 <h1 id="heading">Register</h1>
 

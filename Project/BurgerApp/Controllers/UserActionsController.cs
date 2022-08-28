@@ -38,12 +38,13 @@ namespace BurgerApp.Controllers
             {
                 string name = HttpContext.Session.GetString("User_Name");
                 _registerS.AddToCart(id,name);
-                
+                TempData["AddToCart_Alert"] = "Burger added successfully !!";
+
                 return RedirectToAction("User_Home","Register");
             }
-            catch (UserExistsException e)
+            catch
             {
-                return StatusCode(500, e.Message);
+                return RedirectToAction("AddToCartEx","Exceptions");
 
             }
         }
@@ -73,10 +74,11 @@ namespace BurgerApp.Controllers
                     return RedirectToAction("User_Home");
                 }
             }
-            catch(Exception e)
+            catch
             {
 
-                 return StatusCode(Quantity, e.Message);
+                return RedirectToAction("BuyEx", "Exceptions");
+
             }
         }
 
@@ -86,14 +88,15 @@ namespace BurgerApp.Controllers
             {
                 var name = HttpContext.Session.GetString("User_Name");
                 _registerS.RemoveCartItem(id, name);
+                TempData["RemoveCartItem_Alert"] = "Burger removed successfully !!";
 
                 return RedirectToAction("User_Home", "Register");
             }
-            catch (UserExistsException e)
+            catch
             {
-                return StatusCode(500, e.Message);
+               return RedirectToAction("RemoveCartItemEx", "Exceptions");
 
-            }
+             }
         }
 
         public ActionResult RemoveFromBill(int id)
@@ -102,8 +105,6 @@ namespace BurgerApp.Controllers
                 _registerS.RemoveFromBill(id, name);
 
                 return RedirectToAction("ViewBill");
-
-            
         }
 
 
@@ -160,5 +161,12 @@ namespace BurgerApp.Controllers
             return View();
 
         }
+
+        public ActionResult OrderHistory()
+        {
+             var name = HttpContext.Session.GetString("User_Name");
+             List<History> history = _registerS.OrderHistory(name);
+             return View(history);
+    }
     }
 }

@@ -33,9 +33,11 @@ namespace BurgerApp.Controllers
 
                 return RedirectToAction("Login");
             }
-            catch (UserExistsException e)
+            catch 
             {
-                return StatusCode(500, e.Message);
+                TempData["Register_Alert"] = "User already exists !";
+
+                return RedirectToAction("RegisterUser");
 
             }
         }
